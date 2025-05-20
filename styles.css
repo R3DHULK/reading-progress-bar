@@ -1,0 +1,60 @@
+/* Reading Progress Bar Styles */
+
+/* Hide the progress bar when printing */
+@media print {
+    #reading-progress-bar-container {
+        display: none !important;
+    }
+}
+
+/* Custom animations for themes */
+@keyframes pulseReadingBar {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes stripeAnimation {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 50px 0;
+    }
+}
+
+/* Make sure our styles aren't overridden by the page */
+#reading-progress-bar-container {
+    z-index: 2147483647 !important;
+    /* Maximum z-index value */
+    position: fixed !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+    /* Let clicks pass through */
+}
+
+#reading-progress-bar-fill {
+    z-index: 2147483647 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#reading-progress-percentage {
+    z-index: 2147483647 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
+    pointer-events: none !important;
+    /* Let clicks pass through */
+}

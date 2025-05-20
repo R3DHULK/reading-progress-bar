@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Progress Bar Settings</title>
+    <style>
+        :root {
+            --bg-color: rgba(15, 15, 20, 0.8);
+            --text-color: #ffffff;
+            --accent-color: #6e56cf;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --hover-color: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            width: 320px;
+            margin: 0;
+            padding: 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 10px;
+        }
+
+        .container {
+            padding: 1.5rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--accent-color);
+        }
+
+        .setting-group {
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .setting-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .theme-preview {
+            height: 10px;
+            width: 100%;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background-color: var(--border-color);
+        }
+
+        .theme-preview-fill {
+            height: 100%;
+            width: 70%;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .color-option {
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .color-option:hover {
+            transform: scale(1.05);
+        }
+
+        .color-option.selected {
+            border-color: white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: rgba(110, 86, 207, 0.8);
+        }
+
+        .footer {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        .glass-effect {
+            background: rgba(25, 25, 35, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Reading Progress Bar</h1>
+
+        <div class="glass-effect">
+            <div class="setting-group">
+                <label for="theme-select">Progress Bar Theme</label>
+                <select id="theme-select">
+                    <option value="solid">Solid</option>
+                    <option value="gradient">Gradient</option>
+                    <option value="pulse">Pulse</option>
+                    <option value="glow">Glow</option>
+                    <option value="striped">Striped</option>
+                </select>
+
+                <div class="theme-preview">
+                    <div class="theme-preview-fill" id="preview-bar"></div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>Color Palette</label>
+                <div class="color-palette" id="color-palette">
+                    <!-- Purple theme -->
+                    <div class="color-option selected" data-color="#6e56cf" data-bg="#333333"
+                        style="background-color: #6e56cf;"></div>
+                    <!-- Blue theme -->
+                    <div class="color-option" data-color="#4a8fe7" data-bg="#2e3440" style="background-color: #4a8fe7;">
+                    </div>
+                    <!-- Green theme -->
+                    <div class="color-option" data-color="#69b578" data-bg="#2c302e" style="background-color: #69b578;">
+                    </div>
+                    <!-- Teal theme -->
+                    <div class="color-option" data-color="#4ecdc4" data-bg="#292f36" style="background-color: #4ecdc4;">
+                    </div>
+                    <!-- Pink theme -->
+                    <div class="color-option" data-color="#ff6b6b" data-bg="#343434" style="background-color: #ff6b6b;">
+                    </div>
+                    <!-- Amber theme -->
+                    <div class="color-option" data-color="#ffb347" data-bg="#2c2c2c" style="background-color: #ffb347;">
+                    </div>
+                    <!-- Lavender theme -->
+                    <div class="color-option" data-color="#b19cd9" data-bg="#303030" style="background-color: #b19cd9;">
+                    </div>
+                    <!-- Mint theme -->
+                    <div class="color-option" data-color="#98d8c8" data-bg="#2a3532" style="background-color: #98d8c8;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label for="bar-height">Bar Height (px)</label>
+                <input type="number" id="bar-height" min="2" max="20" value="5">
+
+                <label for="bar-position">Bar Position</label>
+                <select id="bar-position">
+                    <option value="top">Top</option>
+                    <option value="bottom">Bottom</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="show-percentage" checked>
+                    <label for="show-percentage">Show percentage</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="smooth-scroll">
+                    <label for="smooth-scroll">Enable smooth scrolling</label>
+                </div>
+            </div>
+        </div>
+
+        <button id="save-settings">Save Settings</button>
+        
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
